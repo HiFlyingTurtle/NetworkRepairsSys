@@ -34,6 +34,23 @@ public class Task {
 		this.state = state;
 		
 	}
+	
+	//构造方法
+		public Task(String publishTime,
+				String userAddress, String type, String troubelDesc,
+				String repairer, String repairTime, String finishTime,  String dealWay,String state) {
+			super();
+			this.publishTime = publishTime;
+			this.userAddress = userAddress;
+			this.type = type;
+			this.troubelDesc = troubelDesc;
+			this.repairer = repairer;
+			this.repairTime = repairTime;
+			this.finishTime = finishTime;
+			this.dealWay = dealWay;
+			this.state = state;
+			
+		}
 	//属性的getset方法
 	public int getTaskId() {
 		return taskId;

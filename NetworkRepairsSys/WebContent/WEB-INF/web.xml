@@ -57,9 +57,6 @@
     <servlet-name>userSaveServlet</servlet-name>
     <url-pattern>/userSave</url-pattern>
   </servlet-mapping>
-  
-  
- 
   <servlet>
     <servlet-name>taskServlet</servlet-name>
     <servlet-class>com.scut.wwh.sys.web.TaskServlet</servlet-class>
@@ -132,7 +129,7 @@
     <servlet-name>messageDelServlet</servlet-name>
     <url-pattern>/messageDel</url-pattern>
   </servlet-mapping>
-  <servlet> 
+  <servlet>
     <servlet-name>messageSaveServlet</servlet-name>
     <servlet-class>com.scut.wwh.sys.web.MessageSaveServlet</servlet-class>
   </servlet>
@@ -155,5 +152,23 @@
   <servlet-mapping>
     <servlet-name>exportUserServlet</servlet-name>
     <url-pattern>/exportUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>loadLoactionServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.LoadLoactionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loadLoactionServlet</servlet-name>
+    <url-pattern>/loadLoaction</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ladRepairerServlet</display-name>
+    <servlet-name>loadRepairerServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.LoadRepairerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loadRepairerServlet</servlet-name>
+    <url-pattern>/loadRepairer</url-pattern>
   </servlet-mapping>
 </web-app>

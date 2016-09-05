@@ -17,7 +17,7 @@
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		userName:$("#s_userName").val(),       //大屏名称
+		repairer:$("#s_repairer").val(), //维修者
 		repairTime:$("#s_repairTime").datebox("getValue"),   //大屏报修时间
 		userAddress:$("#s_userAddress").val()  //大屏位置
 	});
@@ -78,28 +78,27 @@ function closeDialog(){
 			<tr>
 				<th field="cb" checkbox="true"></th>
 				<th align="center" field="taskId" width="15">任务编号</th>
-				<th align="center" field="userName" width="25">大屏名称</th>
 				<th align="center" field="publishTime" width="40">报修时间</th>
-				<th align="center" field="userAddress" width="45">大屏地址</th>
+				<th align="center" field="userAddress" width="45">故障地点</th>
 				<th align="center" field="type" width="30">故障类型</th>
 				<th align="center" field="troubleDesc" width="80">故障描述</th>
 				<th align="center" field="repairer" width="25">维修人员</th>
-				<th align="center" field="repairTime" width="40">维修时间</th>
+				<th align="center" field="finishTime" width="40">维修时间</th>
 				<th align="center" field="state" width="20">状态</th>
 			</tr>
 		</thead>
 	</table>
 	<!-- 工具条，基本操作 -->
 	<div id="tb" style="padding-top: 10px;padding-bottom: 10px;padding-left: 10px">
-		<div title="您的位置">您的位置：导航菜单>>任务管理>>上交任务</div><hr><br>
+		<div title="您的位置">您的位置：导航菜单>>任务管理>>待办事务</div><hr><br>
 		<div style="color: black">相关操作：</div>
 		<div title="相关操作">
 			<a href="javascript:taskReceiveDialog()" class="easyui-linkbutton" iconCls="icon-handIn" plain="">上交任务</a>
 		</div>
 		<div title="查询条件" style="padding-top: 5px">
-			大屏名称：&nbsp;<input type="text" name="s_userName" id="s_userName"/>&nbsp;
-			&nbsp;维修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;
-			&nbsp;大屏地址：<input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;
+		          维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;
+			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
+			&nbsp;故障地点：<input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;
 			<a title="维修" href="javascript:taskSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="">查询</a>
 		</div>
 	</div>
@@ -107,23 +106,16 @@ function closeDialog(){
 	<div id="dlg" class="easyui-dialog" style="width: 500px;height: 440px" buttons="#dlg-button" title="操作对话框" closed="true">
 		<form method="post" id="form" name="form">
 			<table border="0" align="center" style="padding-top: 20px">
-				<tr height="5px"></tr>
-				<tr>
-					<td>大屏名称：</td>
-					<td><input type="text" name="userName" id="userName" disabled="disabled"/></td>
-					<td><font color="red">***报修老师姓名***</font></td>
-				</tr>
-				<tr height="5px"></tr>
 				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" disabled="disabled"/></td>
-					<td><font color="red">***用户报修时间***</font></td>
+					<td><font color="red">***报修时间***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
-					<td >大屏地址：</td>
+					<td >故障地点：</td>
 					<td><input type="text" name="userAddress" id="userAddress" disabled="disabled"></td>
-					<td><font color="red">***报修用户的地址***</font></td>
+					<td><font color="red">***报修大屏的位置***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
@@ -161,7 +153,7 @@ function closeDialog(){
 	<!-- 对话框的按钮，确定和取消 -->
 	<div id="dlg-button">
 		<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
-		<a href="javascript:saveTask()" class="easyui-linkbutton" iconCls="icon-ok">上交</a>
+		<a href="javascript:saveTask()" class="easyui-linkbutton" iconCls="icon-ok">完成</a>
 	</div>
 </body>
 </html>

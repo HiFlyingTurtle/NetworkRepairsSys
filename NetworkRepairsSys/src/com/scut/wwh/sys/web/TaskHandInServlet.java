@@ -33,8 +33,8 @@ public class TaskHandInServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//从前台获取查询条件值，用户名，维修者维修时间，用户地址
-		String userName=request.getParameter("userName");
+		//从前台获取查询条件值,维修者,维修时间，用户地址
+		String repairer=request.getParameter("repairer");
 		String repairtime=request.getParameter("repairTime");
 		String userAddress=request.getParameter("userAddress");
 		String page=request.getParameter("page");
@@ -43,15 +43,18 @@ public class TaskHandInServlet extends HttpServlet{
 		//从session中获取登录的userName
 		HttpSession session=request.getSession();
 		String currentUser=(String) session.getAttribute("myName");
+		String name=(String) session.getAttribute("name");
 		
+		System.out.println("task handle servlet---"+name);
 		//将session中获取的userName传到user里面
 		User user=new User();
 		user.setMyName(currentUser);
+		user.setName(name);
 		
 		Task task=new Task();
-		//将前台传来的查询条件值，用户名，用户报修时间，用户地址传到task里面
-		task.setUserName(userName);
-		task.setRepairTime(repairtime);
+		//将前台传来的查询条件值,维修人员，用户报修时间，故障地点传到task里面
+		task.setRepairer(repairer);
+		task.setPublishTime(repairtime);
 		task.setUserAddress(userAddress);
 		
 		PageBean pageBean=new PageBean(Integer.parseInt(page),Integer.parseInt(rows));

@@ -28,6 +28,7 @@ public class UserDao {
 			resultUser.setUserName(rs.getString("userName"));
 			resultUser.setPassword(rs.getString("password"));
 			resultUser.setLevel(rs.getString("level"));
+			resultUser.setName(rs.getString("name"));
 		}
 		return resultUser;
 	}

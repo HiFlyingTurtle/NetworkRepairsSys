@@ -33,18 +33,22 @@ public class TaskServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String page=request .getParameter("page");
 		String rows=request.getParameter("rows");
-		//从前台获取查询条件，用户名，维修者，状态等条件
-		String userName=request.getParameter("userName");
+		
+		//从前台获取查询条件，维修人员，报修时间，故障地点，状态等条件 共计四个查询关键字
 		String repairer=request.getParameter("repairer");
+		String repairtime=request.getParameter("repairTime");
+		String userAddress=request.getParameter("userAddress");
 		String state=request.getParameter("state");
 		
 
 		Task task=new Task();
-		//将前台传来的用户姓名，维修者，状态等条件传到Task
-		task.setUserName(userName);
+		//将前台传来的维修人员，状态等条件传到Task
 		task.setRepairer(repairer);
+		task.setPublishTime(repairtime);
+		task.setUserAddress(userAddress);
 		task.setState(state);
 
 		PageBean pageBean=new PageBean(Integer.parseInt(page),Integer.parseInt(rows));

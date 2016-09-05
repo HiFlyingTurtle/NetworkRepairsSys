@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>任务维护</title>
 <!-- 判断权限，是否登陆 -->
-    <!-- 判断权限，是否登陆 -->
-    <%@ include file="WEB-INF/right.jsp"%>
+<!-- 判断权限，是否登陆 -->
+<%@ include file="WEB-INF/right.jsp"%>
 <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css">
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>
@@ -17,12 +22,10 @@
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		userName:$("#s_userName").val(),       //大屏名称
 		repairer:$("#s_repairer").val(), //维修者
 		state:$("#s_state").combobox("getValue"),//状态
 	});
 }
-
 //删除的javascript方法
 function taskDelete(){
 	var selectedRows=$('#dg').datagrid('getSelections');
@@ -52,16 +55,64 @@ function taskDelete(){
 	});
 }
 
+function loadingLocation(){
+	$("#userAddress").html("");
+	var str="所有地点";
+	 $.ajax({
+		 type:"post",
+		 dataType:"json",
+		 url:"loadLoaction",
+		 success:function(data){
+			 var jsonData=data.info;
+			//alert("data"+data.info);
+			 for(var i=0,n=jsonData.length;i<n;i++){
+				 $("#userAddress").append("<option  value='"+jsonData[i].location+"'>"+jsonData[i].location+"</option>");
+			 }
+		 }
+	 });
+}
+
+function loadingRepairer(){
+	$("#repairer").html("");
+	 $.ajax({
+		 type:"post",
+		 dataType:"json",
+		 url:"loadRepairer",
+		 success:function(data){
+			 var jsonData=data.info;
+			//alert("data"+data.info);
+			 for(var i=0,n=jsonData.length;i<n;i++){
+				 $("#repairer").append("<option  value='"+jsonData[i].name+"'>"+jsonData[i].name+"</option>");
+			 }
+		 }
+	 });
+}
+
+
 //添加按钮事件，打开添加数据对话框
 var url
 function taskAddDialog(){
-	$("#dlg").dialog("open").dialog("setTitle","发布报修任务");
+	$("#dlg").dialog("open").dialog("setTitle","新建报修任务");
+	    //故障报修地点下拉框
+		$('#userAddress').combobox({
+		url:'loadLoaction',
+		valueField:'location',
+		textField:'location',
+		panelHeight:200
+	});
+	   //故障维修人员下拉框
+		$('#repairer').combobox({
+		url:'loadRepairer',
+		valueField:'name',
+		textField:'name',
+		panelHeight:200
+	});
+	   
 	url="taskSave";
 }
 
 //关闭对话框后要清除文本框里面的数据
 function resetDialogValue(){
-	$("#userName").val("");
 	$("#userAddress").val("");
 	$("#troubleDesc").val("");
 	$("#type").val("");
@@ -79,12 +130,14 @@ function saveTask() {
 	//但一般只用到0000-1234567,1234567和12345678901
 	//var objExp = /^(\d{3})-(\d{8})|(\d{4})-(\d{7})|\d{7}|\d{8}|\d{11}$/;
 	var obj = /^\d{4}-\d{7}|\d{7}|\d{11} &/;
+	
 	/*
 	if(obj.test(phone) == false){
 		alert("电话格式不正确");
 		return;
 	}
 	**/
+	
 	//获取输入的日期
 	//var date = document.getElementById("publishTime").value;
 	var date = $("#publishTime").datetimebox("getValue")
@@ -99,6 +152,7 @@ function saveTask() {
 		return;
 	}
 	
+	//var userAddress=$('#ua').combobox('getText');
 	$("#form").form("submit",{
 		url:url,
 		success:function(result){
@@ -115,6 +169,7 @@ function saveTask() {
 		},
 	});
 }
+
 //对话框上面的取消按钮,即关闭对话框
 function closeDialog(){
 	$("#dlg").dialog("close")
@@ -124,6 +179,8 @@ function closeDialog(){
 function taskExport(){
 	window.open('exportTask');
 }
+
+
 </script>
 </head>
 <body style="margin: 5px">
@@ -134,9 +191,8 @@ function taskExport(){
 			<tr>
 				<th field="cb" checkbox="true"></th>
 				<th align="center" field="taskId" width="15">任务编号</th>
-				<th align="center" field="userName" width="20">大屏名称</th>
 				<th align="center" field="publishTime" width="40">报修时间</th>
-				<th align="center" field="userAddress" width="30">大屏地址</th>
+				<th align="center" field="userAddress" width="30">故障地点</th>
 				<th align="center" field="type" width="30">故障类型</th>
 				<th align="center" field="troubleDesc" width="50">故障描述</th>
 				<th align="center" field="repairer" width="20">维修人员</th>
@@ -151,13 +207,12 @@ function taskExport(){
 		<div title="您的位置">您的位置：导航菜单>>任务管理>>任务维护</div><hr><br>
 		<div style="color: black">相关操作：</div><br>
 		<div title="相关操作">
-			<a title="添加" href="javascript:taskAddDialog()" class="easyui-linkbutton" iconCls="icon-add">发布报修任务</a>
-			<a title="删除" href="javascript:taskDelete()" class="easyui-linkbutton" iconCls="icon-cancel">删除报修记录</a>
-			<a title="导出" href="javascript:taskExport()" class="easyui-linkbutton" iconCls="icon-export">导出报修记录</a>
+			<a title="添加" href="javascript:taskAddDialog()" class="easyui-linkbutton" iconCls="icon-add">新建报修</a>
+			<a title="删除" href="javascript:taskDelete()" class="easyui-linkbutton" iconCls="icon-cancel">删除报修</a>
+			<a title="导出" href="javascript:taskExport()" class="easyui-linkbutton" iconCls="icon-export">导出报修</a>
 		</div>
 		<div title="查询条件" style="padding-top: 5px">
-			大屏名称：&nbsp;<input type="text" name="s_userName" id="s_userName"/>&nbsp;
-			&nbsp;维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;
+                              维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;
 			&nbsp;状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
 				<option value="">--请选择--</option>
 				<option value="待维修">待维修</option>
@@ -171,37 +226,72 @@ function taskExport(){
 		<form method="post" id="form" name="form">
 			<table align="center" style="padding-top: 50px;padding-bottom: 50px;">
 				<tr>
-					<td>大屏名称：</td>
-					<td><input type="text" name="userName" id="userName"/></td>
-					<td><font color="red">***报修屏幕名称***</font></td>
-				</tr>
-				<tr height="10px"></tr>
-				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" class="easyui-datetimebox" required="true"/></td>
 					<td><font color="red">***大屏报修时间***</font></td>
 				</tr>
 				<tr height="10px"></tr>
+				
 				<tr>
-					<td >大屏位置：</td>
-					<td><input type="text" name="userAddress" id="userAddress" class="easyui-validatebox" required="true"></td>
-					<td><font color="red">***大屏报修的位置***</font></td>
+					<td >故障地点：</td>
+					<td><input  name="userAddress" id="userAddress" class="easyui-combobox" value="--请选择报修地点--"></td>
+					<td><font color="red">***大屏的故障地点***</font></td>
 				</tr>
 				<tr height="10px"></tr>
 				
+				<tr height="10px"></tr>
+				
+				 <tr>
+					<td >维修人员：</td>
+					<td><input  name="repairer" id="repairer" class="easyui-combobox" value="--请选择维修人员--"></td>
+					<td><font color="red">***大屏的维修人员***</font></td>
+				</tr>
+				
+				<tr height="10px"></tr>
+				
+				 <!-- 
+				 <tr>
+					<td >故障地点：</td>
+					<td> 
+					<select id="userAddress" name="userAddress"  class="easyui-validatebox"  required="true">
+					<option value="">所有地点</option>
+					</select> 
+					</td>
+					<td><font color="red">***大屏报修的地点***</font></td>
+				</tr>
+			
+				    <select id="repairer" name="repairer"  class="easyui-validatebox"  required="true">
+					   <option value="">所有人员</option>
+					</select> 
+			
 				<tr>
 					<td >维修人员：</td>
 					<td><input type="text" name="repairer" id="repairer" class="easyui-validatebox"  required="true"></td>
 					<td><font color="red">***大屏维修的人员***</font></td>
 				</tr>
-				<tr height="10px"></tr>
 				
 				<tr>
 					<td>故障类型：</td>
 					<td><input type="text" name="type" id="type" class="easyui-validatebox" required="true"></td>
 					<td><font color="red">***报修故障的类型(软件/硬件)***</font></td>
 				</tr>
+				
+				-->
+				
+				<tr>
+				<td>故障类型：</td>
+				<td>
+				<select class="easyui-combobox" name="type" id="type">
+				<option value="">--请选择故障类型--</option>
+				<option value="硬件">硬件</option>
+				<option value="软件">软件</option>
+				</select>
+				</td>
+				<td><font color="red">***报修故障的类型(软件/硬件)***</font></td>
+				</tr>
+				
 				<tr height="10px"></tr>
+				
 				<tr>
 					<td valign="top">故障描述：</td>
 					<td><textarea name="troubleDesc" id="troubleDesc"></textarea></td>

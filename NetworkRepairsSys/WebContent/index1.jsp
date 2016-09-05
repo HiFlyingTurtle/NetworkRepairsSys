@@ -27,13 +27,13 @@
     			menuname: "任务管理",
     			menus: [{
     				menuid: "12",
-    				menuname: "上交任务",
+    				menuname: "待办事务",
     				icon: "tu1301",
     				url: "taskHandIn.jsp",
     			},
     			{
     				menuid: "13",
-    				menuname: "任务浏览",
+    				menuname: "历史记录",
     				icon: "tu0117",
     				url: "taskBrowser.jsp",
     			}]

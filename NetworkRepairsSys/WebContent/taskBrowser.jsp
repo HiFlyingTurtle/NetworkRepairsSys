@@ -14,14 +14,17 @@
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
+
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		userName:$("#s_userName").val(),       //大屏名称
 		repairer:$("#s_repairer").val(), 		//维护人员
+		repairTime:$("#s_repairTime").datebox("getValue"),//大屏报修时间
+		userAddress:$("#s_userAddress").val() ,//故障地点
 		state:$("#s_state").combobox("getValue"),//维修状态
 	});
 }
+
 </script>
 </head>
 <body style="margin: 5px">
@@ -30,9 +33,8 @@ function taskSearch(){
 		<thead>
 			<tr>
 				<th align="center" field="taskId" width="15">任务编号</th>
-				<th align="center" field="userName" width="30">大屏名称</th>
 				<th align="center" field="publishTime" width="35">报修时间</th>
-				<th align="center" field="userAddress" width="25">大屏地址</th>
+				<th align="center" field="userAddress" width="25">故障地点</th>
 				<th align="center" field="type" width="30">故障类型</th>
 				<th align="center" field="troubleDesc" width="70">故障描述</th>
 				<th align="center" field="repairer" width="20">维修人员</th>
@@ -44,12 +46,13 @@ function taskSearch(){
 	</table>
 	<!-- 工具条，基本操作 -->
 	<div id="tb" style="padding-top: 10px;padding-bottom: 10px;padding-left: 10px">
-		<div title="您的位置">您的位置：导航菜单>>任务管理>>所有任务浏览</div><hr><br>
-		<div style="color: black;padding:">查询：</div>
+		<div title="您的位置">您的位置：导航菜单>>任务管理>>历史记录</div><hr><br>
+		<div style="color: black;padding:">查询操作：</div>
 		<div title="查询条件">
-			大屏名称：&nbsp;<input type="text" name="s_userName" id="s_userName"/>&nbsp;
-			&nbsp;维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;
-			&nbsp;状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
+			维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;
+			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
+			故障地点：<input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;
+			状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
 				<option value="">--请选择--</option>
 				<option value="待维修">待维修</option>
 				<option value="已维修">已维修</option>

@@ -13,6 +13,7 @@ public class ResponseUtil {
 		response.setContentType("text/html;charset=utf-8");//设置页面的编码格式
 		PrintWriter out=response.getWriter();
 		out.println(object.toString());
+	//	System.out.println("object"+object.toString());
 		out.flush();
 		out.close();
 	}

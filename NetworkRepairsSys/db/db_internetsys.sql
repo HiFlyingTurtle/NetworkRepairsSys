@@ -16,6 +16,20 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_internetsys` /*!40100 DEFAULT CHARAC
 
 USE `db_internetsys`;
 
+/*Table structure for table `t_location` */
+
+DROP TABLE IF EXISTS `t_location`;
+
+CREATE TABLE `t_location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+/*Data for the table `t_location` */
+
+insert  into `t_location`(`id`,`location`) values (1,'广州南都北墙'),(2,'广州北京路'),(3,'广州车天车地'),(4,'深圳东门广场'),(5,'深圳新绿岛'),(6,'深圳金凯广场'),(7,'佛山国际ICC'),(8,'江门住建广场'),(9,'江门东方广场'),(10,'江门中泰来酒店'),(11,'中山兴中广场'),(12,'中山益华广场'),(13,'肇庆星湖广场'),(14,'东莞大朗新世纪广场'),(15,'惠州花边岭广场'),(16,'清远市政府'),(17,'云浮东街口'),(18,'珠海钰海'),(19,'潮州蓝月湾酒店');
+
 /*Table structure for table `t_memo` */
 
 DROP TABLE IF EXISTS `t_memo`;
@@ -66,11 +80,11 @@ CREATE TABLE `t_repair` (
   `dealWay` varchar(100) DEFAULT NULL,
   `state` char(8) DEFAULT NULL,
   PRIMARY KEY (`taskId`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_repair` */
 
-insert  into `t_repair`(`taskId`,`userName`,`publishTime`,`userAddress`,`type`,`troubleDesc`,`repairer`,`repairTime`,`finishTime`,`dealWay`,`state`) values (75,'南方新世纪led','2016-08-26 10:26:10','珠江新城','硬件','屏幕有裂痕','1001',NULL,'2016-08-27 10:44:18','dada','已维修'),(76,'111','2016-08-27 10:41:50','珠江新城','硬件','tets','wwh',NULL,'2016-08-27 15:22:00','test','已维修'),(77,'222','2016-08-26 15:10:47','珠江新城','软件','系统宕机','wwh',NULL,NULL,NULL,'待维修');
+insert  into `t_repair`(`taskId`,`userName`,`publishTime`,`userAddress`,`type`,`troubleDesc`,`repairer`,`repairTime`,`finishTime`,`dealWay`,`state`) values (81,NULL,'2016-09-04 21:36:33','广州南都北墙','dasd','dasd','we',NULL,'2016-09-05 14:49:59','只是测试','已维修'),(82,NULL,'2016-09-04 22:34:08','广州南都北墙','硬件','test','wwh',NULL,'2016-09-05 14:51:13','hehe','已维修'),(83,NULL,'2016-09-04 22:53:13','广州北京路','软件','dadad','宋定生',NULL,NULL,NULL,'待维修'),(85,NULL,'2016-09-05 00:14:35','广州南都北墙','软件','test','何春',NULL,NULL,NULL,'待维修'),(90,NULL,'2016-09-06 10:32:27','广州车天车地','软件','dada','从键良',NULL,NULL,NULL,'待维修'),(91,NULL,'2016-09-05 10:33:00','深圳金凯广场','硬件','dasd','从键良',NULL,NULL,NULL,'待维修'),(92,NULL,'2016-09-05 10:59:46','广州南都北墙','硬件','sdads','宋定生',NULL,NULL,NULL,'待维修');
 
 /*Table structure for table `t_user` */
 
@@ -89,11 +103,11 @@ CREATE TABLE `t_user` (
   `phone` varchar(11) DEFAULT NULL,
   `address` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_user` */
 
-insert  into `t_user`(`id`,`userName`,`password`,`level`,`name`,`sex`,`birthday`,`grade`,`major`,`phone`,`address`) values (13,'wwh','123456','职员','王文浩','男','2016-08-24','2','cs','132','gz'),(14,'admin','admin','管理员','admin',NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `t_user`(`id`,`userName`,`password`,`level`,`name`,`sex`,`birthday`,`grade`,`major`,`phone`,`address`) values (14,'admin','admin','管理员','admin',NULL,NULL,NULL,NULL,NULL,NULL),(15,'hec','hec','职员','何春','男',NULL,NULL,NULL,'13530116912',NULL),(16,'congjl','congjl','职员','从键良','男',NULL,NULL,NULL,'18027461551',NULL),(17,'yangzl','yangzl','职员','杨仲冬','男',NULL,NULL,NULL,'15013661948',NULL),(18,'songds','songds','职员','宋定生','男',NULL,NULL,NULL,'18098900732',NULL),(19,'fuda','fuda','职员','傅道安','男',NULL,NULL,NULL,'13450297970',NULL),(20,'wangyq','wangyq','职员','王烨全','男',NULL,NULL,NULL,'13535238728',NULL),(21,'lis','lis','职员','李胜','男',NULL,NULL,NULL,'18602069268',NULL),(22,'wufc','wufc','职员','吴凡超','男',NULL,NULL,NULL,'18676891783',NULL),(23,'liqb','liqb','职员','李启邦',NULL,NULL,NULL,NULL,'18666078413',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

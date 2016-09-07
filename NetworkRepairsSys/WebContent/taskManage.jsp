@@ -207,7 +207,7 @@ function taskExport(){
 <body style="margin: 5px">
     <!-- field的名字要与数据库表的列的字段名保持一致 -->
 	<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
-	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true">
+	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true" >
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true"></th>
@@ -215,10 +215,10 @@ function taskExport(){
 				<th align="center" field="publishTime" width="40">报修时间</th>
 				<th align="center" field="userAddress" width="30">故障地点</th>
 				<th align="center" field="type" width="30">故障类型</th>
-				<th align="center" field="troubleDesc" width="50">故障描述</th>
+				<th align="center" field="troubleDesc" width="50" nowrap="false">故障描述</th>
 				<th align="center" field="repairer" width="20">维修人员</th>
 			    <th align="center" field="finishTime" width="40">维修时间</th>
-				<th align="center" field="dealWay" width="70">处理方法</th>
+				<th align="center" field="dealWay" width="70" nowrap="false">处理方法</th>
 				<th align="center" field="state" width="20">状态</th>
 			</tr>
 		</thead>

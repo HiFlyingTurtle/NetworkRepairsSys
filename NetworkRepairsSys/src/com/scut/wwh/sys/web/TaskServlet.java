@@ -39,6 +39,7 @@ public class TaskServlet extends HttpServlet{
 		
 		//从前台获取查询条件，维修人员，报修时间，故障地点，状态等条件 共计四个查询关键字
 		String repairer=request.getParameter("repairer");
+	//	System.out.println("repairer"+repairer);
 		String repairtime=request.getParameter("repairTime");
 		String userAddress=request.getParameter("userAddress");
 		String state=request.getParameter("state");

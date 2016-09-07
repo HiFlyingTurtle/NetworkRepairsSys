@@ -14,13 +14,28 @@
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
-
+$(function(){
+	//故障维修人员下拉框
+	$('#s_repairer').combobox({
+	url:'loadRepairer',
+	valueField:'name',
+	textField:'name',
+	panelHeight:200
+     });
+	 //故障报修地点下拉框
+	$('#s_userAddress').combobox({
+	url:'loadLoaction',
+	valueField:'location',
+	textField:'location',
+	panelHeight:200
+});
+})
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		repairer:$("#s_repairer").val(), 		//维护人员
+		repairer:$("#s_repairer").combobox("getValue"), //维修人员
 		repairTime:$("#s_repairTime").datebox("getValue"),//大屏报修时间
-		userAddress:$("#s_userAddress").val() ,//故障地点
+		userAddress:$("#s_userAddress").combobox("getValue"),  //故障地点
 		state:$("#s_state").combobox("getValue"),//维修状态
 	});
 }
@@ -49,9 +64,9 @@ function taskSearch(){
 		<div title="您的位置">您的位置：导航菜单>>任务管理>>历史记录</div><hr><br>
 		<div style="color: black;padding:">查询操作：</div>
 		<div title="查询条件">
-			维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;
+			维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer" class="easyui-combobox"/>&nbsp;&nbsp;
 			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
-			故障地点：<input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;
+			故障地点：<input type="text" name="s_userAddress" id="s_userAddress" class="easyui-combobox"/>&nbsp;
 			状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
 				<option value="">--请选择--</option>
 				<option value="待维修">待维修</option>

@@ -171,4 +171,14 @@
     <servlet-name>loadRepairerServlet</servlet-name>
     <url-pattern>/loadRepairer</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>loadTypeServlet</display-name>
+    <servlet-name>loadTypeServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.LoadTypeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loadTypeServlet</servlet-name>
+    <url-pattern>/loadType</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -19,13 +19,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
+
+$(function(){
+	//s_repairer
+	//故障维修人员下拉框
+	$('#s_repairer').combobox({
+	url:'loadRepairer',
+	valueField:'name',
+	textField:'name',
+	panelHeight:200
+});	
+})
+
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		repairer:$("#s_repairer").val(), //维修者
+		repairer:$("#s_repairer").combobox("getValue"), //维修者
 		state:$("#s_state").combobox("getValue"),//状态
 	});
 }
+
 //删除的javascript方法
 function taskDelete(){
 	var selectedRows=$('#dg').datagrid('getSelections');
@@ -105,6 +118,14 @@ function taskAddDialog(){
 		url:'loadRepairer',
 		valueField:'name',
 		textField:'name',
+		panelHeight:200
+	});
+	   
+	   //故障类型下拉框  type
+		$('#tp').combobox({
+		url:'loadType',
+		valueField:'type',
+		textField:'type',
 		panelHeight:200
 	});
 	   
@@ -212,8 +233,9 @@ function taskExport(){
 			<a title="导出" href="javascript:taskExport()" class="easyui-linkbutton" iconCls="icon-export">导出报修</a>
 		</div>
 		<div title="查询条件" style="padding-top: 5px">
-                              维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;
-			&nbsp;状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
+           <!--  维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp; -->    
+                              维修人员:&nbsp;<input  name="s_repairer" id="s_repairer" class="easyui-combobox">&nbsp;                 
+			状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
 				<option value="">--请选择--</option>
 				<option value="待维修">待维修</option>
 				<option value="已维修">已维修</option>
@@ -222,31 +244,43 @@ function taskExport(){
 		</div>
 	</div>
 	<!-- 对话框，添加，修改时弹出的对话框 -->
-	<div id="dlg" class="easyui-dialog" style="width: 500px;height: 380px" buttons="#dlg-button" title="操作对话框" closed="true">
+	<div id="dlg" class="easyui-dialog" style="width: 600px;height: 450px" buttons="#dlg-button" title="操作对话框" closed="true">
 		<form method="post" id="form" name="form">
 			<table align="center" style="padding-top: 50px;padding-bottom: 50px;">
 				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" class="easyui-datetimebox" required="true"/></td>
-					<td><font color="red">***大屏报修时间***</font></td>
+					<td><font color="blue">***大屏报修时间***</font></td>
 				</tr>
 				<tr height="10px"></tr>
 				
 				<tr>
 					<td >故障地点：</td>
 					<td><input  name="userAddress" id="userAddress" class="easyui-combobox" value="--请选择报修地点--"></td>
-					<td><font color="red">***大屏的故障地点***</font></td>
+					<td><font color="blue">***大屏的故障地点***</font></td>
 				</tr>
 				<tr height="10px"></tr>
 				
-				<tr height="10px"></tr>
 				
 				 <tr>
 					<td >维修人员：</td>
 					<td><input  name="repairer" id="repairer" class="easyui-combobox" value="--请选择维修人员--"></td>
-					<td><font color="red">***大屏的维修人员***</font></td>
+					<td><font color="blue">***大屏的维修人员***</font></td>
 				</tr>
+				<tr height="10px"></tr>
 				
+				<tr>
+				<td>故障类型：</td>
+				<td><input  name="type" id="tp" class="easyui-combobox" value="--请选择维故障类型--"></td>
+				<td><font color="blue">***报修故障的类型(软件/硬件)***</font></td>
+				</tr>
+				<tr height="30px"></tr>
+				
+				<tr>
+					<td valign="middle">故障描述：</td>
+					<td><textarea cols="17" rows="8" name="troubleDesc" id="troubleDesc"></textarea></td>
+					<td valign="middle"><font color="blue">&nbsp;&nbsp;***故障的简单描述***</font></td>
+				</tr>
 				<tr height="10px"></tr>
 				
 				 <!-- 
@@ -275,29 +309,12 @@ function taskExport(){
 					<td><input type="text" name="type" id="type" class="easyui-validatebox" required="true"></td>
 					<td><font color="red">***报修故障的类型(软件/硬件)***</font></td>
 				</tr>
-				
-				-->
-				
-				<tr>
-				<td>故障类型：</td>
-				<td>
 				<select class="easyui-combobox" name="type" id="type">
 				<option value="">--请选择故障类型--</option>
 				<option value="硬件">硬件</option>
 				<option value="软件">软件</option>
 				</select>
-				</td>
-				<td><font color="red">***报修故障的类型(软件/硬件)***</font></td>
-				</tr>
-				
-				<tr height="10px"></tr>
-				
-				<tr>
-					<td valign="top">故障描述：</td>
-					<td><textarea name="troubleDesc" id="troubleDesc"></textarea></td>
-					<td valign="bottom"><font color="red">***故障的简单描述***</font></td>
-				</tr>
-				
+				-->
 			</table>
 		</form>
 	</div>

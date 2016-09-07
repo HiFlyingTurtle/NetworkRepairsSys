@@ -45,7 +45,7 @@ public class TaskHandInServlet extends HttpServlet{
 		String currentUser=(String) session.getAttribute("myName");
 		String name=(String) session.getAttribute("name");
 		
-		System.out.println("task handle servlet---"+name);
+//		System.out.println("task handle servlet---"+name);
 		//将session中获取的userName传到user里面
 		User user=new User();
 		user.setMyName(currentUser);

@@ -14,12 +14,30 @@
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="jquery-easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
+$(function(){
+	//s_repairer
+	//故障维修人员下拉框
+	$('#s_repairer').combobox({
+	url:'loadRepairer',
+	valueField:'name',
+	textField:'name',
+	panelHeight:200
+     });
+	 //故障报修地点下拉框
+	$('#s_userAddress').combobox({
+	url:'loadLoaction',
+	valueField:'location',
+	textField:'location',
+	panelHeight:200
+});
+})
+
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
-		repairer:$("#s_repairer").val(), //维修者
+		repairer:$("#s_repairer").combobox("getValue"), //维修人员
 		repairTime:$("#s_repairTime").datebox("getValue"),   //大屏报修时间
-		userAddress:$("#s_userAddress").val()  //大屏位置
+		userAddress:$("#s_userAddress").combobox("getValue")  //故障地点
 	});
 }
 
@@ -96,9 +114,13 @@ function closeDialog(){
 			<a href="javascript:taskReceiveDialog()" class="easyui-linkbutton" iconCls="icon-handIn" plain="">上交任务</a>
 		</div>
 		<div title="查询条件" style="padding-top: 5px">
-		          维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;
+		     <!-- 维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;  --> 
+			<!-- <input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;&nbsp; -->
+			维修人员:&nbsp;<input  name="s_repairer" id="s_repairer" class="easyui-combobox">&nbsp;&nbsp;
 			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
-			&nbsp;故障地点：<input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;
+			故障地点：<input  name="s_userAddress" id="s_userAddress" class="easyui-combobox">&nbsp;&nbsp;
+			
+			
 			<a title="维修" href="javascript:taskSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="">查询</a>
 		</div>
 	</div>
@@ -109,43 +131,43 @@ function closeDialog(){
 				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" disabled="disabled"/></td>
-					<td><font color="red">***报修时间***</font></td>
+					<td><font color="blue">***报修时间***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td >故障地点：</td>
 					<td><input type="text" name="userAddress" id="userAddress" disabled="disabled"></td>
-					<td><font color="red">***报修大屏的位置***</font></td>
+					<td><font color="blue">***报修大屏的位置***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td>故障类型：</td>
 					<td><input type="text" name="type" id="type" disabled="disabled"></td>
-					<td><font color="red">***报修故障类型(硬件/软件)***</font></td>
+					<td><font color="blue">***报修故障类型(硬件/软件)***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td valign="top">故障描述：</td>
 					<td><textarea name="troubleDesc" id="troubleDesc" disabled="disabled"></textarea></td>
-					<td valign="top"><font color="red">***故障的简单描述***</font></td>
+					<td valign="top"><font color="blue">***故障的简单描述***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td valign="top">维修人员：</td>
 					<td><input type="text" name="repairer" id="repairer" disabled="disabled"></td>
-					<td valign="top"><font color="red">***维修者姓名***</font></td>
+					<td valign="top"><font color="blue">***维修者姓名***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td>维修时间：</td>
 					<td><input type="text" name="finishTime" id="finishTime" class="easyui-datetimebox" required="true"/></td>
-					<td><font color="red">***维修结束的时间***</font></td>
+					<td><font color="blue">***维修结束的时间***</font></td>
 				</tr>
 				<tr height="5px"></tr>
 				<tr>
 					<td valign="top">处理方法：</td>
 					<td><textarea id="dealWay" name="dealWay"></textarea></td>
-					<td valign="top"><font color="red">***处理方法的简单描述***</font></td>
+					<td valign="top"><font color="blue">***处理方法的简单描述***</font></td>
 				</tr>
 			</table>
 		</form>

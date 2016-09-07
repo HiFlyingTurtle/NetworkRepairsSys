@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>上交任务</title>
 <!-- 判断权限，是否登陆 -->
-    <!-- 判断权限，是否登陆 -->
-    <%@ include file="WEB-INF/right.jsp"%>
+<!-- 判断权限，是否登陆 -->
+<%@ include file="WEB-INF/right.jsp"%>
 <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css">
 <script type="text/javascript" src="jquery-easyui-1.4.2/jquery.min.js"></script>

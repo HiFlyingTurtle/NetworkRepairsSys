@@ -16,6 +16,7 @@
 <script type="text/javascript">
 $(function(){
 	//s_repairer
+	
 	//故障维修人员下拉框
 	$('#s_repairer').combobox({
 	url:'loadRepairer',
@@ -23,6 +24,7 @@ $(function(){
 	textField:'name',
 	panelHeight:200
      });
+	
 	 //故障报修地点下拉框
 	$('#s_userAddress').combobox({
 	url:'loadLoaction',
@@ -32,6 +34,17 @@ $(function(){
 });
 })
 
+  //查看报修单的详情
+ function rowformater(value, row, index) {
+   /*
+   taskBrowser.jsp  javascript:handleIn();
+   var tid=row.taskId;
+   var url="test.jsp?id="+tid;
+   return '<a style=\"color:blue\"' + 'href="' + url +'"'+ 'target=\"_blank\">'+row.userAddress+'</a>';
+   */
+   return '<a style="color:blue" href="javascript:handleIn()">'+row.userAddress+'</a>'
+ }
+     
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
@@ -42,7 +55,15 @@ function taskSearch(){
 }
 
 var url
-//维修任务按钮事件，打开维修任务对话框
+//上交任务按钮事件，打开上交任务对话框
+function handleIn(){
+     //alert();
+    var selectedRows = $('#dg').datagrid('getSelections');
+    var row = selectedRows[0];
+	$("#dlg").dialog("open").dialog("setTitle","上交维修任务");
+	$("#form").form("load",row);
+	url="taskHandInSave?taskId="+row.taskId;
+}
 function taskReceiveDialog(){
 	var selectedRows = $('#dg').datagrid('getSelections');
 	if(selectedRows.length==0){
@@ -74,6 +95,7 @@ function saveTask() {
 				$("#dlg").dialog("close");//同时关闭对话框
 				$("#dg").datagrid("reload");//刷新数据
 				resetDialogValue();//保存成功之后要清除对话框里面的文本框里面的数据
+			//	window.location.href="taskBrowser.jsp"; 
 			}
 		},
 	});
@@ -90,44 +112,64 @@ function closeDialog(){
 </script>
 </head>
 <body style="margin: 5px">
-	<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
+<table id="dg" title="任务信息" class="easyui-datagrid"  data-options="url:'taskHandIn',method:'get'" toolbar="#tb" 
+pagination="true" rownumbers="true" fitcolumns="true" 
+striped="true" singleselect="true" fit="true" nowrap="false">
+            <thead>
+                 <tr>
+                    <th field="cb" checkbox="true"></th>
+                    <th data-options="field:'taskId',width:15">任务编号</th>
+                    <th data-options="field:'publishTime',width:40,align:'center'">报修时间</th>
+                    <th data-options="field:'userAddress',width:60,align:'center',formatter: rowformater">故障地点</th>
+                    <th data-options="field:'type',width:30,align:'center'">故障类型</th>
+                    <th data-options="field:'troubleDesc',width:80,align:'center'">故障描述</th>
+                    <th data-options="field:'repairer',width:25,align:'center'">维修人员</th>
+                    <th data-options="field:'finishTime',width:40,align:'center'">维修时间</th>
+                    <th data-options="field:'state',width:20,align:'center'">状态</th>
+                </tr>
+            </thead>
+        </table>
+<!-- 
+<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
 	  pagination="true" rownumbers="true" url="taskHandIn" toolbar="#tb" fit="true">
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true"></th>
 				<th align="center" field="taskId" width="15">任务编号</th>
 				<th align="center" field="publishTime" width="40">报修时间</th>
-				<th align="center" field="userAddress" width="45">故障地点</th>
+				<th  align="center" field="userAddress" width="45">故障地点</th>
 				<th align="center" field="type" width="30">故障类型</th>
-				<th align="center" field="troubleDesc" width="80">故障描述</th>
+				<th align="center" field="troubleDesc" width="80" >故障描述</th>
 				<th align="center" field="repairer" width="25">维修人员</th>
 				<th align="center" field="finishTime" width="40">维修时间</th>
 				<th align="center" field="state" width="20">状态</th>
 			</tr>
 		</thead>
 	</table>
+ -->
 	<!-- 工具条，基本操作 -->
 	<div id="tb" style="padding-top: 10px;padding-bottom: 10px;padding-left: 10px">
-		<div title="您的位置">您的位置：导航菜单>>任务管理>>待办事务</div><hr><br>
+		<div title="您的位置">您的位置：导航菜单>>任务管理>>待办事务</div>
 		<div style="color: black">相关操作：</div>
+		<!-- 
+		           上交任务按钮  
 		<div title="相关操作">
 			<a href="javascript:taskReceiveDialog()" class="easyui-linkbutton" iconCls="icon-handIn" plain="">上交任务</a>
 		</div>
+		-->
 		<div title="查询条件" style="padding-top: 5px">
 		     <!-- 维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer"/>&nbsp;&nbsp;  --> 
 			<!-- <input type="text" name="s_userAddress" id="s_userAddress"/>&nbsp;&nbsp; -->
 			维修人员:&nbsp;<input  name="s_repairer" id="s_repairer" class="easyui-combobox">&nbsp;&nbsp;
 			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
 			故障地点：<input  name="s_userAddress" id="s_userAddress" class="easyui-combobox">&nbsp;&nbsp;
-			
-			
 			<a title="维修" href="javascript:taskSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="">查询</a>
 		</div>
 	</div>
 	<!-- 对话框，添加，修改时弹出的对话框 -->
-	<div id="dlg" class="easyui-dialog" style="width: 500px;height: 440px" buttons="#dlg-button" title="操作对话框" closed="true">
+	<div id="dlg" class="easyui-dialog" style="width: 600px;height: 450px" buttons="#dlg-button" title="操作对话框" closed="true">
 		<form method="post" id="form" name="form">
-			<table border="0" align="center" style="padding-top: 20px">
+			<table border="0" align="center" style="padding-top: 30px">
 				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" disabled="disabled"/></td>
@@ -166,8 +208,8 @@ function closeDialog(){
 				<tr height="5px"></tr>
 				<tr>
 					<td valign="top">处理方法：</td>
-					<td><textarea id="dealWay" name="dealWay"></textarea></td>
-					<td valign="top"><font color="blue">***处理方法的简单描述***</font></td>
+					<td><textarea id="dealWay" cols="25" rows="4" name="dealWay"></textarea></td>
+					<td valign="middle"><font color="blue">***处理方法的简单描述***</font></td>
 				</tr>
 			</table>
 		</form>

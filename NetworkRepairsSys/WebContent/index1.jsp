@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>新视界传媒&nbsp;-&nbsp;网络报修系统</title>
+    <title>新视界传媒&nbsp;-&nbsp;研发中心在线报修系统</title>
     <!-- 判断权限，是否登陆 -->
     <%@ include file="WEB-INF/right.jsp"%>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css"/>
@@ -26,6 +26,11 @@
     			icon: "tu2004",
     			menuname: "任务管理",
     			menus: [{
+    				menuid: "11",
+    				menuname: "任务维护",
+    				icon: "tu0203",
+    				url: "taskManage.jsp",
+    			},{
     				menuid: "12",
     				menuname: "待办事务",
     				icon: "tu1301",
@@ -102,7 +107,7 @@
 	<!-- 布局	，北面 -->
    <div region="north" style="height: 60px;  background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;" class="header" >
 		<div align="left" style="width: 85%; float: left">
-			<div align="left" style="font-size: 30px;width: 50%;float: left;padding-left: 15px;padding-top: 6px; color: white">网络中心报修系统</div>
+			<div align="left" style="font-size: 30px;width: 50%;float: left;padding-left: 15px;padding-top: 6px; color: white">研发中心在线报修系统</div>
 			<!-- js生成动态时间 -->
 			<div align="right" style="float: right;padding-top: 35px">
 				<font color="white"><label id="showTime" ></label></font>

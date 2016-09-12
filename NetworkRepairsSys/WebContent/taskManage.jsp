@@ -207,7 +207,7 @@ function taskExport(){
 <body style="margin: 5px">
     <!-- field的名字要与数据库表的列的字段名保持一致 -->
 	<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
-	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true" >
+	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true" nowrap="false" >
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true"></th>
@@ -246,14 +246,13 @@ function taskExport(){
 	<!-- 对话框，添加，修改时弹出的对话框 -->
 	<div id="dlg" class="easyui-dialog" style="width: 600px;height: 450px" buttons="#dlg-button" title="操作对话框" closed="true">
 		<form method="post" id="form" name="form">
-			<table align="center" style="padding-top: 50px;padding-bottom: 50px;">
+			<table align="center" style="padding-top: 30px;padding-bottom: 30px;">
 				<tr>
 					<td >报修时间：</td>
 					<td><input type="text" name="publishTime" id="publishTime" class="easyui-datetimebox" required="true"/></td>
 					<td><font color="blue">***大屏报修时间***</font></td>
 				</tr>
 				<tr height="10px"></tr>
-				
 				<tr>
 					<td >故障地点：</td>
 					<td><input  name="userAddress" id="userAddress" class="easyui-combobox" value="--请选择报修地点--"></td>
@@ -278,7 +277,7 @@ function taskExport(){
 				
 				<tr>
 					<td valign="middle">故障描述：</td>
-					<td><textarea cols="17" rows="8" name="troubleDesc" id="troubleDesc"></textarea></td>
+					<td><textarea cols="25" rows="6" name="troubleDesc" id="troubleDesc"></textarea></td>
 					<td valign="middle"><font color="blue">&nbsp;&nbsp;***故障的简单描述***</font></td>
 				</tr>
 				<tr height="10px"></tr>
@@ -320,8 +319,8 @@ function taskExport(){
 	</div>
 	<!-- 对话框的按钮，确定和取消 -->
 	<div id="dlg-button">
+	    <a href="javascript:saveTask()" class="easyui-linkbutton" iconCls="icon-ok">确认</a>
 		<a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">取消</a>
-		<a href="javascript:saveTask()" class="easyui-linkbutton" iconCls="icon-ok">确认</a>
 	</div>
 </body>
 </html>

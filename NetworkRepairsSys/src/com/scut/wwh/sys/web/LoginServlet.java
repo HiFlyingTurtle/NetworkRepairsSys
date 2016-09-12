@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet{
 				//将登录的用户名缓存到myName
 				session.setAttribute("myName", currentUser.getUserName());
 				session.setAttribute("name", currentUser.getName());
-				System.out.println("name---"+currentUser.getName());
+				System.out.println("用户登录用户名name---:"+currentUser.getName());
 				//判断权限，如果是管理员，则跳到index.jsp
 				if(currentUser.getLevel().equals(currentLevel)){
 					response.sendRedirect("index.jsp");

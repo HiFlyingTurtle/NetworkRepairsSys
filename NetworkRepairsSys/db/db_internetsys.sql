@@ -84,8 +84,6 @@ CREATE TABLE `t_repair` (
 
 /*Data for the table `t_repair` */
 
-insert  into `t_repair`(`taskId`,`userName`,`publishTime`,`userAddress`,`type`,`troubleDesc`,`repairer`,`repairTime`,`finishTime`,`dealWay`,`state`) values (83,NULL,'2016-09-04 22:53:13','广州北京路','软件','dadad','宋定生',NULL,NULL,NULL,'待维修'),(85,NULL,'2016-09-05 00:14:35','广州南都北墙','软件','test','何春',NULL,NULL,NULL,'待维修'),(90,NULL,'2016-09-06 10:32:27','广州车天车地','软件','dada','从键良',NULL,'2016-09-07 11:31:05','dadadadadasdadadasdasdadasdadasd','已维修'),(91,NULL,'2016-09-05 10:33:00','深圳金凯广场','硬件','dasd','从键良',NULL,NULL,NULL,'待维修'),(92,NULL,'2016-09-05 10:59:46','广州南都北墙','硬件','sdads','宋定生',NULL,NULL,NULL,'待维修'),(93,NULL,'2016-09-06 15:29:24','广州北京路','电源','test','何春',NULL,NULL,NULL,'待维修');
-
 /*Table structure for table `t_type` */
 
 DROP TABLE IF EXISTS `t_type`;
@@ -94,11 +92,11 @@ CREATE TABLE `t_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_type` */
 
-insert  into `t_type`(`id`,`type`) values (1,'模组'),(2,'电源'),(3,'系统接收卡'),(4,'系统发送卡'),(5,'信号排线'),(6,'电源端子、端子台'),(7,'风机'),(8,'空调'),(9,'包饰漏水'),(10,'配电柜'),(11,'联播网控制电脑'),(12,'其他(异常断电，异常断信号)');
+insert  into `t_type`(`id`,`type`) values (1,'模组'),(2,'电源'),(3,'系统接收卡'),(4,'系统发送卡'),(5,'信号排线'),(6,'电源端子、端子台'),(7,'风机'),(8,'空调'),(9,'包饰漏水'),(10,'配电柜'),(11,'联播网控制电脑'),(12,'其他(异常断电，异常断信号)'),(13,'软件系统'),(14,'硬件'),(15,'网络');
 
 /*Table structure for table `t_user` */
 

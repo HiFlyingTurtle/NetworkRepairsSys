@@ -44,7 +44,7 @@ function taskSearch(){
 </head>
 <body style="margin: 5px">
 	<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
-	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true">
+	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true" nowrap="false">
 		<thead>
 			<tr>
 				<th align="center" field="taskId" width="15">任务编号</th>
@@ -54,7 +54,7 @@ function taskSearch(){
 				<th align="center" field="troubleDesc" width="70">故障描述</th>
 				<th align="center" field="repairer" width="20">维修人员</th>
 				<th align="center" field="finishTime" width="35">维修时间</th>
-				<th align="center" field="dealWay" width="35">解决方法</th>
+				<th align="center" field="dealWay" width="35" nowrap="false">解决方法</th>
 				<th align="center" field="state" width="20">状态</th>
 			</tr>
 		</thead>

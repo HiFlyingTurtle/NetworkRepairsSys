@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>新视界传媒&nbsp;-&nbsp;网络报修系统</title>
+    <title>新视界传媒&nbsp;-&nbsp;研发中心在线报修系统</title>
     <!-- 判断权限，是否登陆 -->
     <%@ include file="WEB-INF/right.jsp"%>
     <link rel="stylesheet" type="text/css" href="jquery-easyui-1.4.2/themes/icon.css"/>
@@ -114,7 +114,7 @@
 	<!-- 布局	，北面 -->
    <div region="north" style="height: 60px;  background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;" class="header" >
 		<div align="left" style="width: 85%; float: left">
-			<div align="left" style="font-size: 30px;width: 50%;float: left;padding-left: 15px;padding-top: 6px; color: white">在线报修系统</div>
+			<div align="left" style="font-size: 30px;width: 50%;float: left;padding-left: 15px;padding-top: 6px; color: white">研发中心在线报修系统</div>
 			<!-- js生成动态时间 -->
 			<div align="right" style="float: right;padding-top: 35px">
 				<font color="white"><label id="showTime" ></label></font>
@@ -154,7 +154,7 @@
 			<div title="首页" style="padding-bottom:15px;overflow:hidden;">
 				<div style="width: 100%;height: 84.5%;background-color: #FDFDFD">
 					<div align="center" style="padding-top: 14%;font-size: 50px; color:green ;font-family:华文行楷" >
-						欢迎使用在线报修系统
+						欢迎使用研发中心在线报修系统
 					</div>
 				</div>
 			</div>

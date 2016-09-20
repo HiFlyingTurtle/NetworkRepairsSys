@@ -6,7 +6,7 @@ public class DbUtil {
 	private String jdbcName="com.mysql.jdbc.Driver";						//数据库驱动名
 	private String dbUrl="jdbc:mysql://localhost:3306/db_internetSys?useUnicode=true&characterEncoding=UTF-8";		//数据库地址
 	private String dbUserName="root";										//数据库用户名
-	private String dbPassword="123456789";									//数据库登录密码
+	private String dbPassword="root";									//数据库登录密码
 	
 	//连接数据
 	public Connection getCon() throws Exception{

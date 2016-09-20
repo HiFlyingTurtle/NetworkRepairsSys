@@ -181,4 +181,14 @@
     <servlet-name>loadTypeServlet</servlet-name>
     <url-pattern>/loadType</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>taskManageServlet</display-name>
+    <servlet-name>taskManageServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.TaskManageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>taskManageServlet</servlet-name>
+    <url-pattern>/taskManage</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -207,7 +207,7 @@ function taskExport(){
 <body style="margin: 5px">
     <!-- field的名字要与数据库表的列的字段名保持一致 -->
 	<table id="dg" title="任务信息" class="easyui-datagrid" fitColumns="true"
-	  pagination="true" rownumbers="true" url="task" toolbar="#tb" fit="true" nowrap="false" >
+	  pagination="true" rownumbers="true" url="taskManage" toolbar="#tb" fit="true" nowrap="false" >
 		<thead>
 			<tr>
 				<th field="cb" checkbox="true"></th>

@@ -76,7 +76,7 @@
     			},**/
     			{
     				menuid: "31",
-    				menuname: "登录密码维护",
+    				menuname: "密码维护",
     				icon: "tu2012",
     				url: "personPWDModify.jsp",
     			

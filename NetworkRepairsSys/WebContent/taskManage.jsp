@@ -200,8 +200,6 @@ function closeDialog(){
 function taskExport(){
 	window.open('exportTask');
 }
-
-
 </script>
 </head>
 <body style="margin: 5px">

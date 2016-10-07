@@ -3,7 +3,7 @@ package com.scut.wwh.sys.model;
 public class Task {
 	private int taskId;				//任务编号
 	private String userName;		//用户姓名
-	private String publishTime;		//发布时间,报修时间
+	private String publishTime;		//报修时间
 	private String userAddress;		//用户地址
 	private String type;			//故障类型
 	private String troubelDesc;		//故障描述

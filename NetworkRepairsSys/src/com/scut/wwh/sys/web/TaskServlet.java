@@ -2,6 +2,7 @@ package com.scut.wwh.sys.web;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import net.sf.json.JSONObject;
 import com.scut.wwh.sys.dao.TaskDao;
 import com.scut.wwh.sys.model.PageBean;
 import com.scut.wwh.sys.model.Task;
+import com.scut.wwh.sys.util.DateUtil;
 import com.scut.wwh.sys.util.DbUtil;
 import com.scut.wwh.sys.util.JsonUtil;
 import com.scut.wwh.sys.util.ResponseUtil;
@@ -41,9 +43,20 @@ public class TaskServlet extends HttpServlet{
 		String repairer=request.getParameter("repairer");
 	//	System.out.println("repairer"+repairer);
 		String repairtime=request.getParameter("repairTime");
+		String repairTimeEnd=request.getParameter("repairTimeEnd");
+		//yyyy-MM-dd
+		if(repairTimeEnd==null||repairTimeEnd.equals("")){
+			Date nowDate=new Date();
+			try {
+				repairTimeEnd=DateUtil.formaDate(nowDate, "yyyy-MM-dd");
+				System.out.println("repairTimeEnd:"+repairTimeEnd);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		String userAddress=request.getParameter("userAddress");
 		String state=request.getParameter("state");
-		
+		System.out.println("开始时间---"+repairtime+"--->结束时间"+repairTimeEnd);
 
 		Task task=new Task();
 		//将前台传来的维修人员，状态等条件传到Task
@@ -57,8 +70,8 @@ public class TaskServlet extends HttpServlet{
 		try{
 			con=dbUtil.getCon();//连接数据库
 			JSONObject result=new JSONObject();
-			JSONArray jsonArray=JsonUtil.formatRsToJsonArray(allTaskDao.taskList(con,pageBean,task));
-			int total=allTaskDao.allTaskCount(con,task);
+			JSONArray jsonArray=JsonUtil.formatRsToJsonArray(allTaskDao.taskList(con,pageBean,task,repairTimeEnd));
+			int total=allTaskDao.allTaskCount(con,task,repairTimeEnd);
 			result.put("rows", jsonArray);
 			result.put("total", total);
 			ResponseUtil.write(response, result);

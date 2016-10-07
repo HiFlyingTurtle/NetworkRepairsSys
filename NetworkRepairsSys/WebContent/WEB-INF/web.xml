@@ -191,4 +191,25 @@
     <servlet-name>taskManageServlet</servlet-name>
     <url-pattern>/taskManage</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <display-name>personInfoModifyServlet</display-name>
+    <servlet-name>personInfoModifyServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.PersonInfoModifyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>personInfoModifyServlet</servlet-name>
+    <url-pattern>/personInfoModify</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <display-name>personPWDSaveServlet</display-name>
+    <servlet-name>personPWDSaveServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.PersonPWDSaveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>personPWDSaveServlet</servlet-name>
+    <url-pattern>/personPWD</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

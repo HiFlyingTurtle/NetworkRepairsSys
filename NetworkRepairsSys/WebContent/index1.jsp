@@ -43,7 +43,7 @@
     				url: "taskBrowser.jsp",
     			}]
     		},
-    		
+    		/**
     		//消息管理模块
     		{
     			menuid: "2",
@@ -55,6 +55,32 @@
     				icon: "tu1010",
     				url: "messageBrowser.jsp",
     		    }]
+    	    },**/
+    	  //系统管理模块
+    	    {
+    			menuid: "3",
+    			icon: "tu0206",
+    			menuname: "系统管理",
+    			menus: [
+    	/**		        {
+    				menuid: "31",
+    				menuname: "职员管理",
+    				icon: "tu1911",
+    				url: "userManage.jsp"
+    			},
+    			{
+    				menuid: "32",
+    				menuname: "个人信息维护",
+    				icon: "tu0925",
+    				url: "personInfoModify.jsp",
+    			},**/
+    			{
+    				menuid: "31",
+    				menuname: "登录密码维护",
+    				icon: "tu2012",
+    				url: "personPWDModify.jsp",
+    			
+    			}]
     	    }]
     	};
       

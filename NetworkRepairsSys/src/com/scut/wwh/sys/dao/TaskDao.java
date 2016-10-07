@@ -10,7 +10,7 @@ import com.scut.wwh.sys.util.StringUtil;
 
 public class TaskDao {
 	//显示所有任务信息，以及查询功能
-	public ResultSet taskList(Connection con,PageBean pageBean, Task task) throws Exception{
+	public ResultSet taskList(Connection con,PageBean pageBean, Task task,String repairTimeEnd) throws Exception{
 		//String userAddress repairer    state   publishTime   order by publishTime desc 
 		//System.out.println("sql begining-----"+task.getRepairer());
 		StringBuffer sb=new StringBuffer("select * from t_repair where state in('待维修','已维修')");
@@ -37,7 +37,8 @@ public class TaskDao {
 		
 		//如果报修时间不为空，则查询满足其他该状态的记录，其他为空
 		if(StringUtil.isEmpty(task.getUserAddress()) && StringUtil.isEmpty(task.getRepairer()) && StringUtil.isEmpty(task.getState())&&StringUtil.isNotEmpty(task.getPublishTime())){
-			sb.append(" and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+		//	sb.append(" and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime)  order by publishTime desc ");
 		}
 		
 		//如果故障地点和维护人员都不为空的时候，状态和报修时间为空
@@ -52,24 +53,24 @@ public class TaskDao {
 		
 		//如果故障地点和报修时间不为空，故障地点和报修时间
 		if(StringUtil.isNotEmpty(task.getUserAddress()) && StringUtil.isEmpty(task.getRepairer()) && StringUtil.isEmpty(task.getState())&&StringUtil.isNotEmpty(task.getPublishTime())){
-			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
 		}
 		
 		
 		//如果维修人员和状态不为空，故障地点和报修时间为空
 		if(StringUtil.isEmpty(task.getUserAddress()) && StringUtil.isNotEmpty(task.getRepairer()) && StringUtil.isNotEmpty(task.getState())&&StringUtil.isEmpty(task.getPublishTime())){
-					sb.append(" and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' order by publishTime desc ");
+			sb.append(" and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' order by publishTime desc ");
 		}
 		
 		
 		//维修人员和报修时间不为空，故障地点和状态为空
 		if(StringUtil.isNotEmpty(task.getRepairer()) && StringUtil.isNotEmpty(task.getPublishTime()) && StringUtil.isEmpty(task.getUserAddress())&&StringUtil.isEmpty(task.getState())){
-			sb.append(" and repairer='"+task.getRepairer()+"' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and repairer='"+task.getRepairer()+"' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
         }
 		
 		//状态和报修时间不为空，故障地点和维修人员
 		if(StringUtil.isNotEmpty(task.getState()) && StringUtil.isNotEmpty(task.getPublishTime()) && StringUtil.isEmpty(task.getUserAddress())&&StringUtil.isEmpty(task.getRepairer())){
-			sb.append(" and state like '%"+task.getState()+"%' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and state like '%"+task.getState()+"%' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
         }
 		
 		//故障地点 ，维修人员，状态不为空，报修时间为空
@@ -78,22 +79,22 @@ public class TaskDao {
         }
 		//故障地点，维修人员，报修时间不为空，状态为空;
 		if(StringUtil.isEmpty(task.getState()) && StringUtil.isNotEmpty(task.getPublishTime()) && StringUtil.isNotEmpty(task.getUserAddress())&&StringUtil.isNotEmpty(task.getRepairer())){
-			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and repairer='"+task.getRepairer()+"'and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and repairer='"+task.getRepairer()+"' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
         }
 		
 		//故障地点 ，状态，报修时间不为空，维修人员为空
 		if(StringUtil.isNotEmpty(task.getState()) && StringUtil.isNotEmpty(task.getPublishTime()) && StringUtil.isNotEmpty(task.getUserAddress())&&StringUtil.isEmpty(task.getRepairer())){
-			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and state like '%"+task.getState()+"%' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and state like '%"+task.getState()+"%' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
         }
 		
 		//维修人员，状态，报修时间不为空，故障地点为空
 		if(StringUtil.isNotEmpty(task.getState()) && StringUtil.isNotEmpty(task.getPublishTime()) && StringUtil.isEmpty(task.getUserAddress())&&StringUtil.isNotEmpty(task.getRepairer())){
-			sb.append(" and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
         }
 		
 		//如果故障点，维修人员，状态,报修时间都不为空
 		if(StringUtil.isNotEmpty(task.getUserAddress()) && StringUtil.isNotEmpty(task.getRepairer()) && StringUtil.isNotEmpty(task.getState())&& StringUtil.isNotEmpty(task.getPublishTime())){
-			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and userAddress like '%"+task.getUserAddress()+"%' and repairer='"+task.getRepairer()+"' and state like '%"+task.getState()+"%' and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime) order by publishTime desc ");
 		}
 		
 		if(pageBean!=null){
@@ -104,7 +105,7 @@ public class TaskDao {
 	}
 	
 	//统计任务记录数
-	public int allTaskCount(Connection con, Task task) throws Exception{
+	public int allTaskCount(Connection con, Task task,String repairTimeEnd) throws Exception{
 		 
 		StringBuffer sb=new StringBuffer("select count(*) as total from t_repair where state in('待维修','已维修')");
 		//如果故障点，维修人员，状态,报修时间都为空
@@ -129,7 +130,9 @@ public class TaskDao {
 		
 		//如果报修时间不为空，则查询满足其他该状态的记录，其他为空
 		if(StringUtil.isEmpty(task.getUserAddress()) && StringUtil.isEmpty(task.getRepairer()) && StringUtil.isEmpty(task.getState())&&StringUtil.isNotEmpty(task.getPublishTime())){
-			sb.append(" and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+//			sb.append(" and publishTime like '%"+task.getPublishTime()+"%' order by publishTime desc ");
+			sb.append(" and cast(publishTime as datetime) between cast('"+task.getPublishTime()+"' as datetime) and cast('"+repairTimeEnd+"' as datetime)  order by publishTime desc ");
+
 		}
 		
 		//如果故障地点和维护人员都不为空的时候，状态和报修时间为空

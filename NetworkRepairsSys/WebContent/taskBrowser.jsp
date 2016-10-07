@@ -30,11 +30,25 @@ $(function(){
 	panelHeight:200
 });
 })
+/**
+$(function(){
+   var curr_time = new Date();
+   var endDate = curr_time.getFullYear()+"-";
+   strDate += curr_time.getMonth()+1+"-";
+   strDate += curr_time.getDate()+"-";
+   strDate += curr_time.getHours()+":";
+   strDate += curr_time.getMinutes()+":";
+   strDate += curr_time.getSeconds();
+   alert(endDate);
+   $("#s_repairTime_end").datebox("setValue", endDate); 
+  });
+  **/
 //查询的javascript方法
 function taskSearch(){
 	$('#dg').datagrid('load',{
 		repairer:$("#s_repairer").combobox("getValue"), //维修人员
-		repairTime:$("#s_repairTime").datebox("getValue"),//大屏报修时间
+		repairTime:$("#s_repairTime").datebox("getValue"),//大屏报修开始时间
+		repairTimeEnd:$("#s_repairTime_end").datebox("getValue"),//大屏报修开始时间
 		userAddress:$("#s_userAddress").combobox("getValue"),  //故障地点
 		state:$("#s_state").combobox("getValue"),//维修状态
 	});
@@ -65,7 +79,8 @@ function taskSearch(){
 		<div style="color: black;padding:">查询操作：</div>
 		<div title="查询条件">
 			维修人员：&nbsp;<input type="text" name="s_repairer" id="s_repairer" class="easyui-combobox"/>&nbsp;&nbsp;
-			报修时间 ：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
+			开始时间：<input type="text" name="s_repairTime" id="s_repairTime" class="easyui-datebox"/>&nbsp;&nbsp;
+		          结束时间：<input type="text" name="s_repairTime_end" id="s_repairTime_end" class="easyui-datebox"/>&nbsp;&nbsp;
 			故障地点：<input type="text" name="s_userAddress" id="s_userAddress" class="easyui-combobox"/>&nbsp;
 			状态：&nbsp;<select class="easyui-combobox" name="s_state" id="s_state" editable="false" panelHeight="auto">
 				<option value="">--请选择--</option>

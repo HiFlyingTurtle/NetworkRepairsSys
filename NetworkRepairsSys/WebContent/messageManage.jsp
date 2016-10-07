@@ -105,10 +105,14 @@ function saveMessage() {
 				return;
 			}
 			else{
-				$.messager.alert("温馨提示","发布通知成功！","info");
-				$("#dlg").dialog("close");//同时关闭对话框
-				$("#dg").datagrid("reload");//刷新数据
-				resetDialogValue();//保存成功之后要清除对话框里面的文本框里面的数据
+			//$.messager.alert("温馨提示","发布通知成功！","info");
+			//$("#dg").datagrid("reload");//刷新数据
+			$.messager.alert("温馨提示","发布通知成功！","info",function(){
+				$("#dg").datagrid("reload");
+				location.href = window.location.href;
+			});
+			$("#dlg").dialog("close");//同时关闭对话框	
+			resetDialogValue();//保存成功之后要清除对话框里面的文本框里面的数据
 			}
 		},
 	});

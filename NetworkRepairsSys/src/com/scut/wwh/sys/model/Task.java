@@ -119,4 +119,14 @@ public class Task {
 	public void setDealWay(String dealWay) {
 		this.dealWay = dealWay;
 	}
+	@Override
+	public String toString() {
+		return "Task [taskId=" + taskId + ", userName=" + userName
+				+ ", publishTime=" + publishTime + ", userAddress="
+				+ userAddress + ", type=" + type + ", troubelDesc="
+				+ troubelDesc + ", repairer=" + repairer + ", repairTime="
+				+ repairTime + ", finishTime=" + finishTime + ", state="
+				+ state + ", dealWay=" + dealWay + "]";
+	}
+	
 }

@@ -191,7 +191,6 @@
     <servlet-name>taskManageServlet</servlet-name>
     <url-pattern>/taskManage</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <display-name>personInfoModifyServlet</display-name>
     <servlet-name>personInfoModifyServlet</servlet-name>
@@ -201,7 +200,6 @@
     <servlet-name>personInfoModifyServlet</servlet-name>
     <url-pattern>/personInfoModify</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <display-name>personPWDSaveServlet</display-name>
     <servlet-name>personPWDSaveServlet</servlet-name>
@@ -211,5 +209,14 @@
     <servlet-name>personPWDSaveServlet</servlet-name>
     <url-pattern>/personPWD</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <description></description>
+    <display-name>taskExportWithConditionServlet</display-name>
+    <servlet-name>taskExportWithConditionServlet</servlet-name>
+    <servlet-class>com.scut.wwh.sys.web.TaskExportWithConditionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>taskExportWithConditionServlet</servlet-name>
+    <url-pattern>/exportExcelWithCondition</url-pattern>
+  </servlet-mapping>
 </web-app>

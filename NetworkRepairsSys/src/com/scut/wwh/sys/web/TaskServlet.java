@@ -41,10 +41,10 @@ public class TaskServlet extends HttpServlet{
 		
 		//从前台获取查询条件，维修人员，报修时间，故障地点，状态等条件 共计四个查询关键字
 		String repairer=request.getParameter("repairer");
-	//	System.out.println("repairer"+repairer);
+	    //System.out.println("repairer"+repairer);
 		String repairtime=request.getParameter("repairTime");
 		String repairTimeEnd=request.getParameter("repairTimeEnd");
-		//yyyy-MM-dd
+		//将时间转换为:yyyy-MM-dd
 		if(repairTimeEnd==null||repairTimeEnd.equals("")){
 			Date nowDate=new Date();
 			try {
@@ -56,15 +56,17 @@ public class TaskServlet extends HttpServlet{
 		}
 		String userAddress=request.getParameter("userAddress");
 		String state=request.getParameter("state");
-		System.out.println("开始时间---"+repairtime+"--->结束时间"+repairTimeEnd);
-
-		Task task=new Task();
+		String type=request.getParameter("faultType");//faultType 故障类型
+//		System.out.println("开始时间---"+repairtime+"--->结束时间"+repairTimeEnd);
+//		System.out.println("故障类型---"+type);
 		//将前台传来的维修人员，状态等条件传到Task
+		Task task=new Task();
 		task.setRepairer(repairer);
 		task.setPublishTime(repairtime);
 		task.setUserAddress(userAddress);
 		task.setState(state);
-
+		task.setType(type);
+        System.out.println("前台传入的查询参数----"+task);
 		PageBean pageBean=new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
 		Connection con=null;
 		try{

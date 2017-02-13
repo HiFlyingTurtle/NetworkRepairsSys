@@ -141,8 +141,8 @@ function taskSearch(){
 				<option value="">--请选择--</option>
 				<option value="待维修">待维修</option>
 				<option value="已维修">已维修</option>  
-			</select> &nbsp;
-			故障类型：<input  name="type" id="tp" class="easyui-combobox" value="--请选择维故障类型--"></td>
+			</select><br>
+			故障类型：<input  name="type" id="tp" class="easyui-combobox"></td>
 			<a title="查询" href="javascript:taskSearch()" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
 	</div>
